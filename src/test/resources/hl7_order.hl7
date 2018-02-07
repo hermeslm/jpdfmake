@@ -1,0 +1,11 @@
+MSH|^~\&|KIPURECORDS|10125|United Clinical Labs|201701091716||ORM^001|AISOLT001|P|2.3||||||
+PID|1|2016-TEST20|||TEST^Charles^||19590228|M|||99 Main Street^^Miami^FL^33133||3053053053|||D||2016-TEST20|111223333|
+IN1|1||6578|Nationwide Group|P.O.BOX 7064^^DOVER^DE^19903||8886667777||||Best Airlines||||Primary|Lester^Charles^T|Self|19590208||||||||||||||||||123456789A|||||||M||||||
+ORC|NW|AISOLT001||||||KIPU LAB TEAM|201701091716|||123456789^Test^Doctor^^^^^^^^^^^NPI|
+OBR|1|AISOLT001||CMP^Complete Metabolic Panel1|R||201701091716||||||||S|123456789^Test^Doctor^^^^^^^^^^^NPI|||||||||||||
+DG1|1||F14.129^F14.129 Cocaine abuse with intoxication unspecified||||||||
+DG1|2||F10.221^F10.221 Alcohol dependence with intoxication delirium||||||||
+OBR|2|AISOLT001||200C^Eating Disorder|R||201701091716||||||||S|123456789^Test^Doctor^^^^^^^^^^^NPI|||||||||||||
+DG1|1||F14.129^F14.129 Cocaine abuse with intoxication unspecified||||||||
+DG1|2||F10.221^F10.221 Alcohol dependence with intoxication delirium||||||||
+NTE|1|P|This is the NTE comment, for testing propose|
