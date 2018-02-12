@@ -1,12 +1,11 @@
 package com.onedsol.tools.utils;
 
 import com.onedsol.tools.jpdfmake.*;
-import com.onedsol.tools.jpdfmake.table.TableBody;
-import com.onedsol.tools.jpdfmake.table.TableElement;
-import com.onedsol.tools.jpdfmake.table.TableItem;
+import com.onedsol.tools.jpdfmake.enums.Alignment;
+import com.onedsol.tools.jpdfmake.enums.PageBreak;
+import com.onedsol.tools.jpdfmake.table.*;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,32 +15,37 @@ import java.util.List;
 @Component
 public class PdfUtil {
 
-    static public Pdf initPdfWithHeader(String reportName, String rightText, String base64Logo) {
+    public static Pdf initPdfWithHeader(String reportName, String rightText, String base64Logo) {
 
-        TextItem ln = new TextItem("\n");
-        List<ContentElement> content = new ArrayList<>();
+        List<Object> content = new ArrayList<>();
 
         /**
          * Header
          */
         String companyInfo = rightText + "\n";
-        ExtendedTextItem companyColumn = new ExtendedTextItem(companyInfo, 100,
-                8, Alignment.justify);
+        Text companyColumn = new Text(companyInfo);
+        companyColumn.width(100)
+                .fontSize(8)
+                .alignment(Alignment.justify);
 
         List<String> headerStyles = new ArrayList<>();
         headerStyles.add("header");
-        ExtendedTextItem reportTitleColumn = new ExtendedTextItem(reportName, 22, true,
-                Alignment.center, "#2F5496");
 
-        ImageItem reportLogo = new ImageItem(base64Logo, 100, 50);
+        Text reportTitleColumn = new Text(reportName);
+        reportTitleColumn.fontSize(22)
+                .bold(true)
+                .alignment(Alignment.center)
+                .color("#2F5496");
 
-        ColumnElement columnItem = new ColumnElement();
-        columnItem.getColumns().add(companyColumn);
-        columnItem.getColumns().add(reportTitleColumn);
-        columnItem.getColumns().add(reportLogo);
+        Image reportLogo = new Image(base64Logo, 100, 50);
 
-        content.add(columnItem);
-        content.add(ln);
+        Column column = new Column();
+        column.addColumn(companyColumn);
+        column.addColumn(reportTitleColumn);
+        column.addColumn(reportLogo);
+
+        content.add(column);
+        content.add(PdfUtil.println());
 //        content.add(ln);
 
         Pdf pdf = new Pdf();
@@ -49,28 +53,34 @@ public class PdfUtil {
         return pdf;
     }
 
-    static public Pdf initPdfWithHeaderFitted(String reportName, String rightText, String base64Logo) {
+    public static Pdf initPdfWithHeaderFitted(String reportName, String rightText, String base64Logo) {
 
-        List<ContentElement> content = new ArrayList<>();
+        List<Object> content = new ArrayList<>();
 
         /**
          * Header
          */
         String companyInfo = rightText + "\n";
-        ExtendedTextItem companyColumn = new ExtendedTextItem(companyInfo, 100,
-                8, Alignment.justify);
+        Text companyColumn = new Text(companyInfo);
+        companyColumn.width(100)
+                .fontSize(8)
+                .alignment(Alignment.justify);
 
         List<String> headerStyles = new ArrayList<>();
         headerStyles.add("header");
-        ExtendedTextItem reportTitleColumn = new ExtendedTextItem(reportName, 22, true,
-                Alignment.center, "#2F5496");
 
-        ImageItem reportLogo = new ImageItem(base64Logo, 125, 50);
+        Text reportTitleColumn = new Text(reportName);
+        reportTitleColumn.fontSize(22)
+                .bold(true)
+                .alignment(Alignment.center)
+                .color("#2F5496");
 
-        ColumnElement columnItem = new ColumnElement();
-        columnItem.getColumns().add(companyColumn);
-        columnItem.getColumns().add(reportTitleColumn);
-        columnItem.getColumns().add(reportLogo);
+        Image reportLogo = new Image(base64Logo, 125, 50);
+
+        Column columnItem = new Column();
+        columnItem.addColumn(companyColumn);
+        columnItem.addColumn(reportTitleColumn);
+        columnItem.addColumn(reportLogo);
 
         content.add(columnItem);
 
@@ -79,36 +89,36 @@ public class PdfUtil {
         return pdf;
     }
 
-    static public Pdf finishInvoicePdf(Pdf pdf, BigDecimal total) {
-        List<ContentElement> content = pdf.getContent();
+//    static public Pdf finishInvoicePdf(Pdf pdf, BigDecimal total) {
+//        List<ContentElement> content = pdf.getContent();
+//
+//        content.add(new Text("\n"));
+//        content.add(new ExtendedTextItem("Total: $" + total.toString(), "50%", 9, Alignment.right));
+//        content.add(new Text("\n"));
+//
+//        return pdf;
+//    }
 
-        content.add(new TextItem("\n"));
-        content.add(new ExtendedTextItem("Total: $" + total.toString(), "50%", 9, Alignment.right));
-        content.add(new TextItem("\n"));
-
-        return pdf;
-    }
-
-    static public ContentElement getNotDataTable() {
+    public static Table tableNoData() {
 
         List<Object> columnWidths = new ArrayList<>();
         columnWidths.add(Width.WIDTH_SPACE_EQUALLY);
 
-        TableElement tableElement = new TableElement();
-        tableElement.setLayout(new LayoutElement("#8EAADB", "#8EAADB"));
+        Table tableElement = new Table();
+        tableElement.setLayout(new TableLayout("#8EAADB", "#8EAADB"));
 
         TableBody tableBody = new TableBody();
         tableBody.setWidths(columnWidths);
         tableElement.setTable(tableBody);
 
-        List<Element> tableHeader = new ArrayList<>();
-        tableHeader.add(new TableItem("INFO", "#8EAADB", "#FFFFFF", Alignment.center));
+        List<Item> tableHeader = new ArrayList<>();
+        tableHeader.add(new TableCell("INFO").fillColor("#8EAADB").color("#FFFFFF").alignment(Alignment.center));
 
-        List<Element> tableData = new ArrayList<>();
-        tableData.add(new TableItem("There are no results for the search criteria in this report.",
-                Alignment.center));
+        List<Item> tableData = new ArrayList<>();
+        tableData.add(new TableCell("There are no results for the search criteria.")
+                .alignment(Alignment.center));
 
-        List<List<Element>> body = new ArrayList<List<Element>>();
+        List<List<Item>> body = new ArrayList<>();
         body.add(tableHeader);
         body.add(tableData);
         tableBody.setBody(body);
@@ -118,26 +128,27 @@ public class PdfUtil {
         return tableElement;
     }
 
-    static public ContentElement getNotDataTable(String title, String description) {
+    public static Table tableNoData(String title, String description) {
 
         List<Object> columnWidths = new ArrayList<>();
         columnWidths.add(Width.WIDTH_SPACE_EQUALLY);
 
-        TableElement tableElement = new TableElement();
-        tableElement.setLayout(new LayoutElement("#8EAADB", "#8EAADB"));
+        Table tableElement = new Table();
+        tableElement.setLayout(new TableLayout("#8EAADB", "#8EAADB"));
 
         TableBody tableBody = new TableBody();
         tableBody.setWidths(columnWidths);
         tableElement.setTable(tableBody);
 
-        List<Element> tableHeader = new ArrayList<>();
-        tableHeader.add(new TableItem(title, "#8EAADB", "#FFFFFF", Alignment.center));
+        List<Item> tableHeader = new ArrayList<>();
+        tableHeader.add(new TableCell("INFO:" + title).fillColor("#8EAADB")
+                .color("#FFFFFF")
+                .alignment(Alignment.center));
 
-        List<Element> tableData = new ArrayList<>();
-        tableData.add(new TableItem(description,
-                Alignment.center));
+        List<Item> tableData = new ArrayList<>();
+        tableData.add(new TableCell(description).alignment(Alignment.center));
 
-        List<List<Element>> body = new ArrayList<List<Element>>();
+        List<List<Item>> body = new ArrayList<>();
         body.add(tableHeader);
         body.add(tableData);
         tableBody.setBody(body);
@@ -147,26 +158,28 @@ public class PdfUtil {
         return tableElement;
     }
 
-    static public ContentElement getNotDataTable(String title) {
+    public static Table tableNoData(String title) {
 
         List<Object> columnWidths = new ArrayList<>();
         columnWidths.add(Width.WIDTH_SPACE_EQUALLY);
 
-        TableElement tableElement = new TableElement();
-        tableElement.setLayout(new LayoutElement("#8EAADB", "#8EAADB"));
+        Table tableElement = new Table();
+        tableElement.setLayout(new TableLayout("#8EAADB", "#8EAADB"));
 
         TableBody tableBody = new TableBody();
         tableBody.setWidths(columnWidths);
         tableElement.setTable(tableBody);
 
-        List<Element> tableHeader = new ArrayList<>();
-        tableHeader.add(new TableItem(title, "#8EAADB", "#FFFFFF", Alignment.center));
+        List<Item> tableHeader = new ArrayList<>();
+        tableHeader.add(new TableCell("INFO:" + title).fillColor("#8EAADB")
+                .color("#FFFFFF")
+                .alignment(Alignment.center));
 
-        List<Element> tableData = new ArrayList<>();
-        tableData.add(new TableItem("There are no results for the search criteria in this report.",
-                Alignment.center));
+        List<Item> tableData = new ArrayList<>();
+        tableData.add(new TableCell("There are no results for the search criteria.")
+                .alignment(Alignment.center));
 
-        List<List<Element>> body = new ArrayList<List<Element>>();
+        List<List<Item>> body = new ArrayList<>();
         body.add(tableHeader);
         body.add(tableData);
         tableBody.setBody(body);
@@ -176,12 +189,12 @@ public class PdfUtil {
         return tableElement;
     }
 
-    static public TextItem println() {
-        return new TextItem("\n");
+    public static Text println() {
+        return new Text("\n");
     }
 
-    static public TextItem pageBreak(PageBreak pageBreak) {
-        return new TextItem("\n", pageBreak);
+    public static Text pageBreak(PageBreak pageBreak) {
+        return new Text("\n").pageBreak(pageBreak);
     }
 
 }

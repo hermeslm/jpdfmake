@@ -1,49 +1,76 @@
 package com.onedsol.tools.jpdfmake;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.onedsol.tools.jpdfmake.enums.PageOrientation;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by hermeslm on 4/13/17.
- */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Pdf {
 
-    private List<ContentElement> content = new ArrayList<>();
-
-    private List<StyleElement> styles = new ArrayList<>();
-
+    private WaterMark waterMark;
+    private List<Object> content = new ArrayList<>();
+    private HashMap<String, Object> styles = new HashMap<>();
     private DefaultStyle defaultStyle;
-
     private PageOrientation pageOrientation = PageOrientation.portrait;
 
     public Pdf() {
     }
 
-    public Pdf(List<ContentElement> content) {
-        this.content = content;
+    public Pdf waterMark(WaterMark waterMark) {
+
+        this.waterMark = waterMark;
+        return this;
     }
 
-    public List<ContentElement> getContent() {
+    public Pdf content(List<Object> content) {
+
+        this.content = content;
+        return this;
+    }
+
+    public Pdf styles(HashMap<String, Object> styles) {
+
+        this.styles = styles;
+        return this;
+    }
+
+    public Pdf defaultStyle(DefaultStyle defaultStyle) {
+
+        this.defaultStyle = defaultStyle;
+        return this;
+    }
+
+    public Pdf pageOrientation(PageOrientation pageOrientation) {
+
+        this.pageOrientation = pageOrientation;
+        return this;
+    }
+
+    public void addItem(Object item) {
+        content.add(item);
+    }
+
+    public void addItem(Item item) {
+        content.add(item);
+    }
+
+    public List<Object> getContent() {
         return content;
     }
 
-    public void addContentElement(ContentElement ...contentElement) {
-        for (ContentElement element: contentElement){
-            content.add(element);
-        }
-    }
-
-    public void setContent(List<ContentElement> content) {
+    public void setContent(List<Object> content) {
         this.content = content;
     }
 
-    public List<StyleElement> getStyles() {
-        return styles;
+    public WaterMark getWaterMark() {
+        return waterMark;
     }
 
-    public void setStyles(List<StyleElement> styles) {
-        this.styles = styles;
+    public void setWaterMark(WaterMark waterMark) {
+        this.waterMark = waterMark;
     }
 
     public DefaultStyle getDefaultStyle() {
@@ -54,20 +81,19 @@ public class Pdf {
         this.defaultStyle = defaultStyle;
     }
 
-    @Override
-    public String toString() {
-        return "Pdf{" +
-            "content=" + content +
-            ", styles=" + styles +
-            ", defaultStyle=" + defaultStyle +
-            '}';
-    }
-
     public PageOrientation getPageOrientation() {
         return pageOrientation;
     }
 
     public void setPageOrientation(PageOrientation pageOrientation) {
         this.pageOrientation = pageOrientation;
+    }
+
+    public HashMap<String, Object> getStyles() {
+        return styles;
+    }
+
+    public void setStyles(HashMap<String, Object> styles) {
+        this.styles = styles;
     }
 }

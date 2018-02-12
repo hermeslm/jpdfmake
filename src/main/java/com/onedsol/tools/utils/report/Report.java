@@ -1,7 +1,7 @@
 package com.onedsol.tools.utils.report;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.onedsol.tools.jpdfmake.PageOrientation;
+import com.onedsol.tools.jpdfmake.enums.PageOrientation;
 
 import java.io.Serializable;
 import java.util.HashMap;

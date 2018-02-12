@@ -1,7 +1,7 @@
 package com.onedsol.tools.jpdfmake.canvas;
 
-import com.onedsol.tools.jpdfmake.Element;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.onedsol.tools.jpdfmake.Item;
 
 import java.util.List;
 
@@ -9,28 +9,28 @@ import java.util.List;
  * Created by hermeslm on 4/13/17.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Canvas extends Element {
+public class Canvas extends Item {
 
-    private List<CanvasElement> canvas;
+    private List<Item> canvas;
 
     private Boolean[] border;
 
-    public Canvas(List<CanvasElement> canvasElements) {
+    public Canvas(List<Item> canvasElements) {
         super();
         this.canvas = canvasElements;
     }
 
-    public Canvas(List<CanvasElement> canvas, Boolean[] border) {
+    public Canvas(List<Item> canvas, Boolean[] border) {
         super();
         this.canvas = canvas;
         this.border = border;
     }
 
-    public List<CanvasElement> getCanvas() {
+    public List<Item> getCanvas() {
         return canvas;
     }
 
-    public void setCanvas(List<CanvasElement> canvas) {
+    public void setCanvas(List<Item> canvas) {
         this.canvas = canvas;
     }
 

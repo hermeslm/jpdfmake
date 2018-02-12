@@ -1,9 +1,13 @@
 package com.onedsol.tools.jpdfmake.canvas;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.onedsol.tools.jpdfmake.Item;
+
 /**
  * Created by hermeslm on 5/11/17.
  */
-public class Dash {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Dash extends Item {
 
     private Integer length;
 

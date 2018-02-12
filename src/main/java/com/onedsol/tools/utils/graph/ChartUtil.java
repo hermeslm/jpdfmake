@@ -1,6 +1,6 @@
 package com.onedsol.tools.utils.graph;
 
-import com.onedsol.tools.jpdfmake.ImageItem;
+import com.onedsol.tools.jpdfmake.Image;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -70,8 +70,8 @@ public class ChartUtil {
         ImageIO.write(img, "jpg", outputFile);
     }
 
-    public static ImageItem genGaugeWithBarIndicatorChart(InputStream gaugeImageIs, boolean flip,
-                                                          Double value, int width, int height) {
+    public static Image genGaugeWithBarIndicatorChart(InputStream gaugeImageIs, boolean flip,
+                                                      Double value, int width, int height) {
 
         try {
             BufferedImage img = ImageIO.read(gaugeImageIs);
@@ -86,15 +86,15 @@ public class ChartUtil {
             ImageIO.write(tmp, "png", baos);
             byte[] encoded = Base64.getEncoder().encode(baos.toByteArray());
             baos.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static ImageItem genGaugeWithRectIndicatorChart(InputStream gaugeImageIs, boolean flip,
-                                                           Double value, int width, int height) {
+    public static Image genGaugeWithRectIndicatorChart(InputStream gaugeImageIs, boolean flip,
+                                                       Double value, int width, int height) {
 
         try {
             BufferedImage img = ImageIO.read(gaugeImageIs);
@@ -109,7 +109,7 @@ public class ChartUtil {
             ImageIO.write(tmp, "png", baos);
             byte[] encoded = Base64.getEncoder().encode(baos.toByteArray());
             baos.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -117,8 +117,8 @@ public class ChartUtil {
     }
 
 
-    public static ImageItem genPieChart(DefaultPieDataset dataSet, String title,
-                                        Color background, int width, int height) {
+    public static Image genPieChart(DefaultPieDataset dataSet, String title,
+                                    Color background, int width, int height) {
 
         JFreeChart chart = ChartFactory.createPieChart3D(
                 title,  // chart title
@@ -143,7 +143,7 @@ public class ChartUtil {
             ImageIO.write(img, "png", os);
             byte[] encoded = Base64.getEncoder().encode(os.toByteArray());
             os.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,10 +151,10 @@ public class ChartUtil {
         }
     }
 
-    public static ImageItem genHStackedBarChart(DefaultCategoryDataset dataSet, String title,
-                                                Color background, String domainAxisLabel,
-                                                String rangeAxisLabel, List<Color> seriesColor,
-                                                int width, int height, Marker marker) {
+    public static Image genHStackedBarChart(DefaultCategoryDataset dataSet, String title,
+                                            Color background, String domainAxisLabel,
+                                            String rangeAxisLabel, List<Color> seriesColor,
+                                            int width, int height, Marker marker) {
 
         StackedBarRenderer br = new StackedBarRenderer(false); //enable perc. display
         br.setBarPainter(new StandardBarPainter());
@@ -216,7 +216,7 @@ public class ChartUtil {
             ImageIO.write(img, "png", os);
             byte[] encoded = Base64.getEncoder().encode(os.toByteArray());
             os.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -225,7 +225,7 @@ public class ChartUtil {
 
     }
 
-    public static ImageItem genTimeSeriesChart(TimeSeriesCollection dataset, String title, Color background, int width, int height) {
+    public static Image genTimeSeriesChart(TimeSeriesCollection dataset, String title, Color background, int width, int height) {
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
                 title, "Date", "Tests Value", dataset, true, true, false);
         XYPlot plot = chart.getXYPlot();
@@ -254,18 +254,18 @@ public class ChartUtil {
             byte[] encoded = Base64.getEncoder().encode(os.toByteArray());
             os.flush();
 
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static ImageItem genAreaChart(DefaultCategoryDataset dataset, String title,
-                                         Color background, String domainAxisLabel,
-                                         String rangeAxisLabel, int width, int height,
-                                         List<Marker> markers, Color seriesColor,
-                                         Font valueFont, Font categoryFont) {
+    public static Image genAreaChart(DefaultCategoryDataset dataset, String title,
+                                     Color background, String domainAxisLabel,
+                                     String rangeAxisLabel, int width, int height,
+                                     List<Marker> markers, Color seriesColor,
+                                     Font valueFont, Font categoryFont) {
 
         JFreeChart chart = ChartFactory.createStackedAreaChart(
                 title,             // chart title
@@ -323,7 +323,7 @@ public class ChartUtil {
             ImageIO.write(img, "png", os);
             byte[] encoded = Base64.getEncoder().encode(os.toByteArray());
             os.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), 200, 50);
+            return new Image("data:image/png;base64," + new String(encoded), 200, 50);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -332,11 +332,11 @@ public class ChartUtil {
 
     }
 
-    static public ImageItem genBarAndAreaChart(DefaultCategoryDataset barDataset, DefaultCategoryDataset areaDataset,
-                                               String title, Color background, String domainAxisLabel,
-                                               String rangeAxisLabel, int width, int height,
-                                               List<Color> barSeriesColor, Color areaColor,
-                                               Font font, boolean showLegend) {
+    static public Image genBarAndAreaChart(DefaultCategoryDataset barDataset, DefaultCategoryDataset areaDataset,
+                                           String title, Color background, String domainAxisLabel,
+                                           String rangeAxisLabel, int width, int height,
+                                           List<Color> barSeriesColor, Color areaColor,
+                                           Font font, boolean showLegend) {
 
         // create the first renderer...
         //      final CategoryLabelGenerator generator = new StandardCategoryLabelGenerator();
@@ -467,12 +467,12 @@ public class ChartUtil {
         return chart;//drawChartImage(chart, width, height);
     }
 
-    static public ImageItem genLineChart(DefaultCategoryDataset dataSet,
-                                         String title, /*Color background, */String domainAxisLabel,
-                                         String rangeAxisLabel, int width, int height,
+    static public Image genLineChart(DefaultCategoryDataset dataSet,
+                                     String title, /*Color background, */String domainAxisLabel,
+                                     String rangeAxisLabel, int width, int height,
                                          /*List<Color> barSeriesColor, Color areaColor,
                                          Font font, */boolean showLegend,
-                                         CategoryLabelPositions categoryLabelPositions) {
+                                     CategoryLabelPositions categoryLabelPositions) {
 
 //        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 //
@@ -566,7 +566,7 @@ public class ChartUtil {
         return drawChartImage(chart, width, height);
     }
 
-    private static ImageItem drawChartImage(JFreeChart chart, int width, int height) {
+    private static Image drawChartImage(JFreeChart chart, int width, int height) {
 
         try {
 
@@ -576,7 +576,7 @@ public class ChartUtil {
             ImageIO.write(img, "png", os);
             byte[] encoded = Base64.getEncoder().encode(os.toByteArray());
             os.flush();
-            return new ImageItem("data:image/png;base64," + new String(encoded), width, height);
+            return new Image("data:image/png;base64," + new String(encoded), width, height);
 
         } catch (Exception e) {
             e.printStackTrace();
