@@ -27,6 +27,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,10 @@ public class ChartTest {
     public void createGaugeBarIndicatorChartTest() {
 
         try {
-            BufferedImage img = ImageIO.read(new File("/tmp/linear_gauge.png"));
+            BufferedImage img = null;
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("graph/linear_gauge.png").getFile());
+            img = ImageIO.read(file);
 
             GaugeChart gaugeChart = new GaugeChart(img);
 
@@ -58,7 +62,10 @@ public class ChartTest {
     public void createGaugeRectIndicatorChartTest() {
 
         try {
-            BufferedImage img = ImageIO.read(new File("/tmp/linear_gauge.png"));
+            BufferedImage img = null;
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("graph/linear_gauge.png").getFile());
+            img = ImageIO.read(file);
 
             GaugeChart gaugeChart = new GaugeChart(img);
 
@@ -79,7 +86,11 @@ public class ChartTest {
     public void createGaugeRectIndicatorChartFlippedTest() {
 
         try {
-            BufferedImage img = ImageIO.read(new File("/tmp/linear_gauge.png"));
+
+            BufferedImage img = null;
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("graph/linear_gauge.png").getFile());
+            img = ImageIO.read(file);
 
             GaugeChart gaugeChart = new GaugeChart(img, true);
 
