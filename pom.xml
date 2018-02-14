@@ -222,7 +222,7 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-        <app.version>1.0.3</app.version>
+        <app.version>1.0.4</app.version>
         <jdk.version>1.8</jdk.version>
         <!--<jodatime.version>2.5</jodatime.version>-->
         <junit.version>4.12</junit.version>
