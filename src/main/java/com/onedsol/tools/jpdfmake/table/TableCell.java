@@ -44,14 +44,6 @@ public class TableCell extends Text {
         this.rowSpan = rowSpan;
     }
 
-    public Object getWidth() {
-        return width;
-    }
-
-    public void setWidth(Object width) {
-        this.width = width;
-    }
-
     public Integer[] getMargin() {
         return margin;
     }

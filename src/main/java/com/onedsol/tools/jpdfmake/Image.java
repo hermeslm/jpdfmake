@@ -13,6 +13,14 @@ public class Image extends Item {
     private Integer width;
     private Integer height;
 
+    //Taken from table cell if we use image in tables.
+    private Integer[] margin;
+    private Boolean[] border;
+    private String fillColor;
+    private Integer colSpan;
+    private Integer rowSpan;
+
+
     //fit format: [100, 300] to the library.
     private Integer[] fit;
     private PageBreak pageBreak;
@@ -54,6 +62,52 @@ public class Image extends Item {
 
         this.pageBreak = pageBreak;
         return this;
+    }
+
+    public Image fillColor(String fillColor) {
+
+        this.fillColor = fillColor;
+        return this;
+    }
+
+    public Integer getRowSpan() {
+        return rowSpan;
+    }
+
+    public void setRowSpan(Integer rowSpan) {
+        this.rowSpan = rowSpan;
+    }
+
+    public Integer[] getMargin() {
+        return margin;
+    }
+
+    public void setMargin(Integer[] margin) {
+        this.margin = margin;
+    }
+
+    public Boolean[] getBorder() {
+        return border;
+    }
+
+    public void setBorder(Boolean[] border) {
+        this.border = border;
+    }
+
+    public String getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(String fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public Integer getColSpan() {
+        return colSpan;
+    }
+
+    public void setColSpan(Integer colSpan) {
+        this.colSpan = colSpan;
     }
 
     public String getImage() {
