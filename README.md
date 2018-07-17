@@ -1,6 +1,6 @@
 ## Java library for pfdmake. 
 
-This library allows to create a pdfmake json descriptor from java (http://pdfmake.org)
+This library allows to creating a pdfmake json descriptor from java (http://pdfmake.org)
 
 ## Demos.
 
