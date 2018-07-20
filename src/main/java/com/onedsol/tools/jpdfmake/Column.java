@@ -9,7 +9,7 @@ import java.util.List;
  * Created by hermeslm on 4/13/17.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Column {
+public class Column extends Item {
 
     private String alignment;
     private ArrayList<Object> columns = new ArrayList<>();

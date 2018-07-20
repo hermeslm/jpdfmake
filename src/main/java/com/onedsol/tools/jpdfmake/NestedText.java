@@ -3,6 +3,7 @@ package com.onedsol.tools.jpdfmake;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.onedsol.tools.jpdfmake.table.Width;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,8 +12,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class NestedText extends Item {
 
-    private List<Item> text;
-    private List<String> style;
+    private List<Item> text = new ArrayList<>();
+    private List<String> style = new ArrayList<>();
     private Integer fontSize;
     private Boolean bold = false;
     private Boolean italics = false;

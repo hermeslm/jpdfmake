@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Table {
+public class Table extends Item {
 
     private String color;
     private String style;
