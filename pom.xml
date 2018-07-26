@@ -4,7 +4,7 @@
     <groupId>com.onedsol.tools</groupId>
     <artifactId>jpdfmake</artifactId>
     <packaging>jar</packaging>
-    <version>${app.version}</version>
+    <version>1.0.7</version>
     <name>Jpdfmake</name>
     <url>http://maven.apache.org</url>
     <description>A Java library for pdfmake(Client/server side PDF printing in pure JavaScript).</description>
@@ -13,16 +13,15 @@
         <developer>
             <name>Hermes Lorenzo</name>
             <email>hermeslm@gmail.com</email>
-            <organization>One Development Solution.</organization>
+            <organization>One Development Solutions.</organization>
             <organizationUrl>https://github.com/hermeslm</organizationUrl>
         </developer>
     </developers>
 
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
 
@@ -38,13 +37,13 @@
 
             <!--&lt;!&ndash; download source code in Eclipse, best practice &ndash;&gt;-->
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-eclipse-plugin</artifactId>-->
-                <!--<version>2.9</version>-->
-                <!--<configuration>-->
-                    <!--<downloadSources>true</downloadSources>-->
-                    <!--<downloadJavadocs>false</downloadJavadocs>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-eclipse-plugin</artifactId>-->
+            <!--<version>2.9</version>-->
+            <!--<configuration>-->
+            <!--<downloadSources>true</downloadSources>-->
+            <!--<downloadJavadocs>false</downloadJavadocs>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
             <!-- Set a JDK compiler level -->
@@ -69,10 +68,10 @@
                         <exclude>**/log4j.properties</exclude>
                     </excludes>
                     <!--<archive>-->
-                        <!--<manifest>-->
-                            <!--&lt;!&ndash; Jar file entry point &ndash;&gt;-->
-                            <!--<mainClass>com.mkyong.core.utils.App</mainClass>-->
-                        <!--</manifest>-->
+                    <!--<manifest>-->
+                    <!--&lt;!&ndash; Jar file entry point &ndash;&gt;-->
+                    <!--<mainClass>com.mkyong.core.utils.App</mainClass>-->
+                    <!--</manifest>-->
                     <!--</archive>-->
                 </configuration>
             </plugin>
@@ -81,12 +80,37 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
                 <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>jar</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
+                <!--<execution>-->
+                <!--<goals>-->
+                <!--<goal>jar</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
                 <!--</executions>-->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -143,11 +167,6 @@
             <version>2.8.4</version>
         </dependency>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20140107</version>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
@@ -168,24 +187,35 @@
             <version>1.0.19</version>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <repository>
-            <id>maven-releases</id>
-            <name>maven-releases</name>
-            <url>http://nexus.bluebookehr.com/repository/maven-releases/</url>
-            <layout>default</layout>
-        </repository>
-        <snapshotRepository>
-            <id>maven-snapshots</id>
-            <name>maven-snapshots</name>
-            <url>http://nexus.bluebookehr.com/repository/maven-snapshots/</url>
-            <layout>default</layout>
-        </snapshotRepository>
-    </distributionManagement>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase></gpg.passphrase>
+            </properties>
+        </profile>
+    </profiles>
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>maven-releases</id>-->
+            <!--<name>maven-releases</name>-->
+            <!--<url>http://nexus.bluebookehr.com/repository/maven-releases/</url>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>maven-snapshots</id>-->
+            <!--<name>maven-snapshots</name>-->
+            <!--<url>http://nexus.bluebookehr.com/repository/maven-snapshots/</url>-->
+            <!--<layout>default</layout>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
     <properties>
         <app.version>1.0.7</app.version>
         <jdk.version>1.8</jdk.version>
-        <!--<jodatime.version>2.5</jodatime.version>-->
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <commons-lang3.version>3.5</commons-lang3.version>
