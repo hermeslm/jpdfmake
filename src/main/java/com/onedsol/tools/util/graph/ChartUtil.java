@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.graph;
+package com.onedsol.tools.util.graph;
 
 import com.onedsol.tools.jpdfmake.Image;
 import org.jfree.chart.ChartFactory;

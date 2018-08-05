@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.graph;
+package com.onedsol.tools.util.graph;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;

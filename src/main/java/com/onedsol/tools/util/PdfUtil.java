@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils;
+package com.onedsol.tools.util;
 
 import com.onedsol.tools.jpdfmake.*;
 import com.onedsol.tools.jpdfmake.enums.Alignment;

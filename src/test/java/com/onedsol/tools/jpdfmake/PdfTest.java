@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onedsol.tools.jpdfmake.enums.Alignment;
 import com.onedsol.tools.jpdfmake.table.*;
-import com.onedsol.tools.utils.PdfUtil;
+import com.onedsol.tools.util.PdfUtil;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 

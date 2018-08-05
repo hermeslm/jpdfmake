@@ -4,7 +4,7 @@
     <groupId>com.onedsol.tools</groupId>
     <artifactId>jpdfmake</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.7</version>
+    <version>1.1.0</version>
     <name>Jpdfmake</name>
     <url>http://maven.apache.org</url>
     <description>A Java library for pdfmake(Client/server side PDF printing in pure JavaScript).</description>
@@ -35,17 +35,6 @@
         <finalName>jpdfmake-${project.version}</finalName>
         <plugins>
 
-            <!--&lt;!&ndash; download source code in Eclipse, best practice &ndash;&gt;-->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-eclipse-plugin</artifactId>-->
-            <!--<version>2.9</version>-->
-            <!--<configuration>-->
-            <!--<downloadSources>true</downloadSources>-->
-            <!--<downloadJavadocs>false</downloadJavadocs>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-
             <!-- Set a JDK compiler level -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -67,25 +56,12 @@
                     <excludes>
                         <exclude>**/log4j.properties</exclude>
                     </excludes>
-                    <!--<archive>-->
-                    <!--<manifest>-->
-                    <!--&lt;!&ndash; Jar file entry point &ndash;&gt;-->
-                    <!--<mainClass>com.mkyong.core.utils.App</mainClass>-->
-                    <!--</manifest>-->
-                    <!--</archive>-->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
-                <!--<executions>-->
-                <!--<execution>-->
-                <!--<goals>-->
-                <!--<goal>jar</goal>-->
-                <!--</goals>-->
-                <!--</execution>-->
-                <!--</executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +87,32 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -186,6 +188,11 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.19</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -213,8 +220,17 @@
             <!--<layout>default</layout>-->
         <!--</snapshotRepository>-->
     <!--</distributionManagement>-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <properties>
-        <app.version>1.0.7</app.version>
         <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>

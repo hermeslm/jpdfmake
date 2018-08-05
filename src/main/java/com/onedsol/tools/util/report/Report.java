@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.report;
+package com.onedsol.tools.util.report;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.onedsol.tools.jpdfmake.enums.PageOrientation;

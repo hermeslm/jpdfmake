@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.report;
+package com.onedsol.tools.util.report;
 
 /**
  * Created by hermeslm on 5/8/17.

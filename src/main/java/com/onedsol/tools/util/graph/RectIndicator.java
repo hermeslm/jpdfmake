@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.graph;
+package com.onedsol.tools.util.graph;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

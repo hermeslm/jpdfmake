@@ -1,4 +1,4 @@
-package com.onedsol.tools.utils.report;
+package com.onedsol.tools.util.report;
 
 public class ExceptionParamType extends Exception {
 

@@ -1,6 +1,6 @@
-package com.onedsol.tools.utils;
+package com.onedsol.tools.util;
 
-import com.onedsol.tools.utils.graph.*;
+import com.onedsol.tools.util.graph.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -27,7 +27,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
