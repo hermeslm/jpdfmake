@@ -4,7 +4,6 @@ import com.onedsol.tools.jpdfmake.*;
 import com.onedsol.tools.jpdfmake.enums.Alignment;
 import com.onedsol.tools.jpdfmake.enums.PageBreak;
 import com.onedsol.tools.jpdfmake.table.*;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 /**
  * Created by hermeslm on 4/27/17.
  */
-@Component
 public class PdfUtil {
 
     public static Pdf initPdfWithHeader(String reportName, String rightText, String base64Logo) {
@@ -25,17 +23,17 @@ public class PdfUtil {
         String companyInfo = rightText + "\n";
         Text companyColumn = new Text(companyInfo);
         companyColumn.width(100)
-                .fontSize(8)
-                .alignment(Alignment.justify);
+                     .fontSize(8)
+                     .alignment(Alignment.justify);
 
         List<String> headerStyles = new ArrayList<>();
         headerStyles.add("header");
 
         Text reportTitleColumn = new Text(reportName);
         reportTitleColumn.fontSize(22)
-                .bold(true)
-                .alignment(Alignment.center)
-                .color("#2F5496");
+                         .bold(true)
+                         .alignment(Alignment.center)
+                         .color("#2F5496");
 
         Image reportLogo = new Image(base64Logo, 100, 50);
 
@@ -63,17 +61,17 @@ public class PdfUtil {
         String companyInfo = rightText + "\n";
         Text companyColumn = new Text(companyInfo);
         companyColumn.width(100)
-                .fontSize(8)
-                .alignment(Alignment.justify);
+                     .fontSize(8)
+                     .alignment(Alignment.justify);
 
         List<String> headerStyles = new ArrayList<>();
         headerStyles.add("header");
 
         Text reportTitleColumn = new Text(reportName);
         reportTitleColumn.fontSize(22)
-                .bold(true)
-                .alignment(Alignment.center)
-                .color("#2F5496");
+                         .bold(true)
+                         .alignment(Alignment.center)
+                         .color("#2F5496");
 
         Image reportLogo = new Image(base64Logo, 125, 50);
 
@@ -142,8 +140,8 @@ public class PdfUtil {
 
         List<Item> tableHeader = new ArrayList<>();
         tableHeader.add(new TableCell("INFO:" + title).fillColor("#8EAADB")
-                .color("#FFFFFF")
-                .alignment(Alignment.center));
+                                                      .color("#FFFFFF")
+                                                      .alignment(Alignment.center));
 
         List<Item> tableData = new ArrayList<>();
         tableData.add(new TableCell(description).alignment(Alignment.center));
@@ -172,8 +170,8 @@ public class PdfUtil {
 
         List<Item> tableHeader = new ArrayList<>();
         tableHeader.add(new TableCell("INFO:" + title).fillColor("#8EAADB")
-                .color("#FFFFFF")
-                .alignment(Alignment.center));
+                                                      .color("#FFFFFF")
+                                                      .alignment(Alignment.center));
 
         List<Item> tableData = new ArrayList<>();
         tableData.add(new TableCell("There are no results for the search criteria.")
